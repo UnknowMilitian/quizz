@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block scripts %}
+    <script src="{% static 'quizes/main.js' %}" defer></script> 
+{% endblock scripts %}
+
+{% block title %}
+home
+{% endblock title %}
+
+{% block content %}
+
+<!-- Modal -->
+<div class="modal fade" id="quizStartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="background-color: #30445C;" class="modal-header">
+        <h5 class="modal-title text-white" id="exampleModalLabel">Start?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div style="background-color: #242B3E" class="modal-body" id="modal-body-confirm"></div>
+      <div style="background-color: #30445C;" class="modal-footer">
+        <button style="border-radius: 10px;" type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+        <button style="border-radius: 10px;" type="button" id="start-button" class="btn btn-success">Yes</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<center>
+  <div class="h1 text-light mt-2"><b style="color: #ED851B">Quiz List</b></div>
+  <h3 class="text-light mt-4">Welcome</h3>
+  <p style="color: #c1c1c1;" class="mt-3">Lorem, ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem id natus at, mollitia ad fuga aperiam accusamus porro, quas. Iure, maxime? Minus, quos ea illum quasi commodi dignissimos perspiciatis voluptate? Minus, quos ea illum quasi?</p>
+</center>
+
+<hr>
+<br>
+<div style="width: 55%" class="container">
+  <div class="row">
+      {% for obj in object_list %}
+        <div class="col-6">
+          <a id="btn" style='text-decoration: none; '
+            class="btn btn-link modal-button ml-3"
+            data-pk="{{obj.pk}}"
+            data-quiz="{{obj.name}}"
+            data-questions="{{obj.number_of_questions}}"
+            data-difficulty="{{obj.difficulty}}"
+            data-time="{{obj.time}}"
+            data-pass = "{{obj.required_score_to_pass}}"
+            data-toggle="modal"
+            data-target="#quizStartModal">
+            {{obj.name}}
+          </a>
+          <br>
+          <br>
+        </div>
+        <hr>
+      {% endfor %}
+  </div>
+
+</div>
+
+
+
+
+<style>
+  b{
+    color: #E78230;
+  }
+  li{
+    color: #CDCDCD;
+    font-family: sans-serif;
+  }
+  .h5{
+    color: #D5D5D5;
+  }
+  #btn{
+    width: 220px; 
+    height: 50px;
+    border-radius: 30px;
+    background-color: #E78230;
+    color: whitesmoke;
+  }
+  #btn:hover{
+    background-color: #fff;
+    color: #E78230;
+    box-shadow: 0 0 8px #30445C, 0 0 16px #30445C, 0 0 24px #30445C;
+    width: 238px;
+    transition: all 0.5s;
+  }
+</style>
+
+{% endblock content %}
